@@ -24,15 +24,34 @@ ul {
 /* ===== Header / Navbar ===== */
 header {
     background: #111827;
-    padding: 15px 10%;
+    padding: 0 10%;
     position: sticky;
     top: 0;
     z-index: 1000;
+    height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.logo span {
+    color: #38bdf8;
 }
 
 header nav {
     display: flex;
-    justify-content: center;
     gap: 30px;
 }
 
@@ -40,15 +59,44 @@ header nav a {
     color: #e5e7eb;
     font-weight: 500;
     transition: 0.3s;
+    position: relative;
 }
 
 header nav a:hover {
     color: #38bdf8;
 }
 
+header nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background: #38bdf8;
+    transition: 0.3s;
+}
+
+header nav a:hover::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
 /* ===== Sections ===== */
 section {
     padding: 80px 10%;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 /* ===== Hero Section ===== */
@@ -897,7 +945,17 @@ footer {
     color: #94a3b8;
 }
 
-/* Responsive CV */
+/* ===== Responsive ===== */
+@media screen and (max-width: 1024px) {
+    section {
+        padding: 60px 5%;
+    }
+
+    .hero-text h1 {
+        font-size: 2.5rem;
+    }
+}
+
 @media screen and (max-width: 900px) {
     .cv-layout {
         grid-template-columns: 1fr;
@@ -909,5 +967,94 @@ footer {
 
     .cv-main-content {
         order: 1;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    header nav {
+        position: fixed;
+        top: 80px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: #111827;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        transition: 0.4s;
+        z-index: 999;
+    }
+
+    header nav.active {
+        left: 0;
+    }
+
+    header nav a {
+        font-size: 1.2rem;
+    }
+
+    .hero {
+        flex-direction: column-reverse;
+        justify-content: center;
+        text-align: center;
+        padding-top: 120px;
+    }
+
+    .hero-image img {
+        width: 280px;
+        margin-bottom: 40px;
+    }
+
+    .hero-text h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-text p {
+        margin: 0 auto 30px;
+    }
+
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-form-container {
+        padding: 25px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .hero-buttons a {
+        margin-right: 0;
+        width: 100%;
+    }
+
+    .service-grid,
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-card {
+        padding: 15px;
+        gap: 15px;
+    }
+
+    .icon-box {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
     }
 }

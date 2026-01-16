@@ -1,4 +1,15 @@
-// Typing effect déjà dans CSS (hero)
+// Mobile Menu Toggle
+const menuToggle = document.getElementById('mobile-menu');
+const navMenu = document.getElementById('nav-menu');
+
+if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        menuToggle.querySelector('i').classList.toggle('fa-bars');
+        menuToggle.querySelector('i').classList.toggle('fa-times');
+    });
+}
+
 // Fade-in scroll animations simples
 window.addEventListener('scroll', () => {
     const sections = document.querySelectorAll('section');
