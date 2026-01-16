@@ -10,10 +10,10 @@
 
         <div class="hero-buttons">
             <a href="{{ route('projects') }}" class="btn primary">Voir mes projets</a>
-            <a href="https://github.com/TON_USERNAME" target="_blank" class="btn dark">
+            <a href="https://github.com/ManafDev" target="_blank" class="btn dark">
                 <i class="fab fa-github"></i> GitHub
             </a>
-            <a href="https://wa.me/228XXXXXXXX" target="_blank" class="btn whatsapp">
+            <a href="https://wa.me/22879771147" target="_blank" class="btn whatsapp">
                 <i class="fab fa-whatsapp"></i> WhatsApp
             </a>
         </div>
