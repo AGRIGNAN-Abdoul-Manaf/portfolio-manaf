@@ -9,7 +9,12 @@ RUN apt-get update && apt-get install -y \
     unzip \
     git \
     curl \
-    libsqlite3-dev
+    libsqlite3-dev \
+    gnupg
+
+# Install Node.js
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -26,8 +31,15 @@ WORKDIR /var/www
 # Copy existing application directory contents
 COPY . /var/www
 
-# Install dependencies
+# Create a temporary .env if it doesn't exist to allow composer scripts to run
+RUN cp .env.example .env
+
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
+
+# Install NPM dependencies and build assets
+RUN npm install
+RUN npm run build
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
@@ -41,5 +53,5 @@ RUN a2enmod rewrite
 # Expose port 80
 EXPOSE 80
 
-# Run migrations and start shop
-CMD php artisan migrate --force && apache2-foreground
+# Ensure database exists and run migrations
+CMD touch database/database.sqlite && php artisan migrate --force && apache2-foreground
