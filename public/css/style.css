@@ -36,18 +36,8 @@ header {
 .nav-container {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-}
-
-.logo a {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #fff;
-}
-
-.logo span {
-    color: #38bdf8;
 }
 
 header nav {
@@ -971,6 +961,10 @@ footer {
 }
 
 @media screen and (max-width: 768px) {
+    .nav-container {
+        justify-content: flex-end;
+    }
+
     .menu-toggle {
         display: block;
     }

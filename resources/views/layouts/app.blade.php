@@ -12,9 +12,6 @@
     <!-- Header / Navbar -->
     <header>
         <div class="nav-container">
-            <div class="logo">
-                <a href="{{ route('home') }}">Manaf<span>Dev</span></a>
-            </div>
             <nav id="nav-menu">
                 <a href="{{ route('home') }}">Accueil</a>
                 <a href="{{ route('services') }}">Services</a>
