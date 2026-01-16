@@ -19,9 +19,6 @@
                 <a href="{{ route('cv') }}">CV</a>
                 <a href="{{ route('contact') }}">Contact</a>
             </nav>
-            <div class="menu-toggle" id="mobile-menu">
-                <i class="fas fa-bars"></i>
-            </div>
         </div>
     </header>
 
