@@ -18,5 +18,5 @@ services:
         value: cookie
       - key: CACHE_STORE
         value: file
-      - key: APP_KEY
-        generateValue: true
+      - key: PORT
+        value: 80
