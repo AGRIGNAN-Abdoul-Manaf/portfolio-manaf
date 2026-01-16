@@ -7,8 +7,8 @@
 }
 
 body {
-    background: #030712;
-    color: #f1f5f9;
+    background: #01289b;
+    color: #e5e7eb;
     line-height: 1.6;
 }
 
@@ -181,7 +181,7 @@ section {
 
 /* ===== Services Section ===== */
 .services {
-    background: radial-gradient(circle at top right, #0f172a 0%, #030712 100%);
+    background: radial-gradient(circle at top right, #0a192f 0%, #01289b 100%);
     position: relative;
     overflow: hidden;
 }
@@ -311,7 +311,7 @@ section {
 
 /* ===== Projects Section ===== */
 .projects {
-    background: radial-gradient(circle at bottom left, #0f172a 0%, #030712 100%);
+    background: radial-gradient(circle at bottom left, #0a192f 0%, #01289b 100%);
 }
 
 .projects .section-subtitle {
@@ -467,7 +467,7 @@ section {
 
 /* ===== Contact Section ===== */
 .contact {
-    background: radial-gradient(circle at top right, #0f172a 0%, #030712 100%);
+    background: radial-gradient(circle at top right, #0a192f 0%, #01289b 100%);
     position: relative;
     overflow: hidden;
 }
@@ -701,7 +701,7 @@ footer {
 
 /* ===== CV Section ===== */
 .cv {
-    background: radial-gradient(circle at bottom left, #0f172a 0%, #030712 100%);
+    background: radial-gradient(circle at bottom left, #0a192f 0%, #01289b 100%);
     min-height: 100vh;
 }
 
