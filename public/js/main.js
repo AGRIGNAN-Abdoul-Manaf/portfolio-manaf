@@ -1,17 +1,32 @@
-// Fade-in scroll animations simples
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('section');
-    const scrollY = window.pageYOffset;
+// Intersection Observer for Reveal Animations
+const observerOptions = {
+    threshold: 0.15
+};
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        if (scrollY > sectionTop) {
-            section.style.opacity = 1;
-            section.style.transform = 'translateY(0)';
-            section.style.transition = '1s';
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+        }
+    });
+}, observerOptions);
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Select all elements to reveal
+    const revealElements = document.querySelectorAll('section, .service-card, .project-card, .skill-group, .info-card, .reveal');
+
+    revealElements.forEach(el => {
+        el.classList.add('reveal');
+        observer.observe(el);
+    });
+
+    // Header Scroll Effect
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
         } else {
-            section.style.opacity = 0;
-            section.style.transform = 'translateY(50px)';
+            header.classList.remove('scrolled');
         }
     });
 });

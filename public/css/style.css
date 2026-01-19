@@ -1,15 +1,53 @@
+/* ===== Variables & Design System ===== */
+:root {
+    --primary: hsl(199, 89%, 48%);
+    --primary-glow: hsla(199, 89%, 48%, 0.3);
+    --secondary: hsl(220, 80%, 40%);
+    --accent: hsl(187, 89%, 50%);
+    --background: hsl(222, 47%, 11%);
+    --background-alt: hsl(222, 47%, 7%);
+    --text: hsl(210, 40%, 96%);
+    --text-muted: hsl(215, 20%, 65%);
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 /* ===== Reset & Base ===== */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Outfit', 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
-    background: #01289b;
-    color: #e5e7eb;
+    background: var(--background);
+    color: var(--text);
     line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--background-alt);
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(var(--primary), var(--secondary));
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
 }
 
 a {
@@ -23,14 +61,23 @@ ul {
 
 /* ===== Header / Navbar ===== */
 header {
-    background: #111827;
+    background: rgba(17, 24, 39, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
     padding: 0 10%;
-    position: sticky;
+    position: fixed;
+    width: 100%;
     top: 0;
     z-index: 1000;
     height: 80px;
     display: flex;
     align-items: center;
+    transition: var(--transition);
+}
+
+header.scrolled {
+    height: 60px;
+    background: rgba(17, 24, 39, 0.95);
 }
 
 .nav-container {
@@ -46,14 +93,15 @@ header nav {
 }
 
 header nav a {
-    color: #e5e7eb;
+    color: var(--text);
     font-weight: 500;
-    transition: 0.3s;
+    transition: var(--transition);
     position: relative;
+    padding: 5px 0;
 }
 
 header nav a:hover {
-    color: #38bdf8;
+    color: var(--primary);
 }
 
 header nav a::after {
@@ -61,25 +109,48 @@ header nav a::after {
     position: absolute;
     width: 0;
     height: 2px;
-    bottom: -5px;
+    bottom: 0;
     left: 0;
-    background: #38bdf8;
-    transition: 0.3s;
+    background: var(--primary);
+    transition: var(--transition);
+    box-shadow: 0 0 10px var(--primary-glow);
 }
 
 header nav a:hover::after {
     width: 100%;
 }
 
-/* ===== Sections ===== */
-section {
-    padding: 80px 10%;
+.section-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 1rem;
+    background: linear-gradient(to right, #fff, var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
+.section-subtitle {
+    text-align: center;
+    color: var(--text-muted);
+    margin-bottom: 4rem;
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ===== Reveal Animations ===== */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ===== Hero Section ===== */
@@ -88,95 +159,131 @@ section {
     justify-content: space-between;
     align-items: center;
     min-height: 100vh;
-    flex-wrap: wrap;
+    padding-top: 100px;
+    background: radial-gradient(circle at 20% 30%, hsla(199, 89%, 48%, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, hsla(220, 80%, 40%, 0.05) 0%, transparent 40%);
 }
 
 .hero-text h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 10px;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, #fff, var(--primary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .hero-text h2.typing {
-    font-weight: 400;
-    color: #38bdf8;
-    margin-bottom: 20px;
-    border-right: 2px solid #38bdf8;
-    white-space: nowrap;
-    overflow: hidden;
-    width: 0;
-    animation: typing 3s steps(26) forwards, blink 0.7s infinite;
-}
-
-@keyframes typing {
-    100% {
-        width: 26ch;
-    }
-}
-
-@keyframes blink {
-
-    0%,
-    100% {
-        border-color: transparent;
-    }
-
-    50% {
-        border-color: #38bdf8;
-    }
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
 }
 
 .hero-text p {
-    max-width: 500px;
-    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin-bottom: 2.5rem;
 }
 
-.hero-buttons a {
-    display: inline-block;
-    margin-right: 10px;
-    padding: 12px 20px;
-    border-radius: 30px;
-    transition: 0.3s;
-    font-weight: 500;
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
 }
 
 .hero-buttons .primary {
-    background: #38bdf8;
-    color: #0f172a;
+    background: var(--primary);
+    color: var(--background);
+    box-shadow: 0 10px 20px var(--primary-glow);
 }
 
 .hero-buttons .primary:hover {
-    background: #0ea5e9;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px var(--primary-glow);
 }
 
 .hero-buttons .dark {
-    background: #111827;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
     color: #fff;
 }
 
 .hero-buttons .dark:hover {
-    background: #374151;
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-3px);
 }
 
 .hero-buttons .whatsapp {
     background: #25D366;
     color: #fff;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
 }
 
 .hero-buttons .whatsapp:hover {
     background: #1ebe5d;
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
 }
 
 /* Hero Image */
-.hero-image img {
-    width: 350px;
-    border-radius: 10%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: 0.5s;
+.hero-image {
+    position: relative;
 }
 
-.hero-image img:hover {
-    transform: scale(1.05);
+.hero-image::before {
+    content: '';
+    position: absolute;
+    inset: -20px;
+    background: var(--primary);
+    filter: blur(60px);
+    opacity: 0.15;
+    z-index: -1;
+    border-radius: 50%;
+    animation: pulse 4s infinite alternate;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.1;
+    }
+
+    100% {
+        transform: scale(1.2);
+        opacity: 0.2;
+    }
+}
+
+.hero-image img {
+    width: clamp(280px, 30vw, 450px);
+    border-radius: 2rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
 }
 
 /* ===== Services Section ===== */
@@ -202,21 +309,21 @@ section {
 }
 
 .service-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--glass);
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
     padding: 40px 30px;
-    border-radius: 30px;
+    border-radius: 2rem;
     text-align: center;
     position: relative;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: var(--transition);
 }
 
 .service-card:hover {
     transform: translateY(-15px);
-    background: rgba(255, 255, 255, 0.07);
-    border-color: #38bdf8;
-    box-shadow: 0 20px 40px -20px rgba(56, 189, 248, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px -20px var(--primary-glow);
 }
 
 .service-icon {
@@ -328,17 +435,17 @@ section {
 }
 
 .project-card {
-    background: rgba(255, 255, 255, 0.03);
+    background: var(--glass);
     backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 30px;
+    border: 1px solid var(--glass-border);
+    border-radius: 2rem;
     overflow: hidden;
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: var(--transition);
 }
 
 .project-card:hover {
     transform: translateY(-15px);
-    border-color: #38bdf8;
+    border-color: var(--primary);
     box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
 }
 
